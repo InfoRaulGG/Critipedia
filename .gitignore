@@ -1,0 +1,12 @@
+
+.vs/
+
+Critipedia.sln
+
+CritipediaDataAccess/obj/
+
+CritipediaEntities/obj/
+
+CritipediaModels/obj/
+
+CritipediaUnitOfWork/obj/
