@@ -14,6 +14,8 @@ namespace CritipediaDataAccess.Repositories
         {
             _connectionStrings = connectionStrings;
         }
+
+
         public bool Delete(T entity)
         {
             using (var con = new SqlConnection(_connectionStrings))
@@ -22,7 +24,7 @@ namespace CritipediaDataAccess.Repositories
             }
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             using (var con = new SqlConnection(_connectionStrings))
             {

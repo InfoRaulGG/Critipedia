@@ -6,6 +6,7 @@ namespace CritipediaDataAccess.Repositories
     {
         public RepositoryCategorias(string connectionStrings) : base(connectionStrings)
         {
+
         }
     }
 }

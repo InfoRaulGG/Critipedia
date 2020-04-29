@@ -9,7 +9,7 @@ namespace Entities
         [Key]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int SubcategoriaId { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Nombre { get; set; }
 

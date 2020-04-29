@@ -8,7 +8,7 @@ namespace Entities
         [Key]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PaswordResetId { get; set; }
+        public int Id { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
