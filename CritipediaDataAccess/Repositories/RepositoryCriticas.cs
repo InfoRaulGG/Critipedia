@@ -9,9 +9,10 @@ namespace CritipediaDataAccess.Repositories
 {
     public class RepositoryCriticas : Repository<Critica>, IRepositoryCriticas
     {
-        public RepositoryCriticas(string connectionStrings) :base(connectionStrings)
+        private IRepositoryComentarios _repoComentarios;
+        public RepositoryCriticas(string connectionStrings, IRepositoryComentarios repoComentarios) :base(connectionStrings)
         {
-                
+            _repoComentarios = repoComentarios;
         }
 
         public override IEnumerable<Critica> GetAll()
@@ -23,11 +24,7 @@ namespace CritipediaDataAccess.Repositories
                 {
                     c.Subcategoria = con.Get<Subcategoria>(c.SubcategoriaID);
 
-                    string query = @"SELECT Descripcion, Nota, Fecha, CriticaId
-                                     FROM Comentarios WHERE CriticaId = @CriticaId";
-                    var parameters = new { CriticaId = c.Id };
-
-                    c.Comentarios = con.Query<Comentario>(query, parameters).ToList();
+                    c.Comentarios = _repoComentarios.GetByCritica(c.Id).ToList();
                 }
 
                 return crits;
@@ -42,7 +39,16 @@ namespace CritipediaDataAccess.Repositories
                                  FROM [dbo].Criticas
                                  Order by Fecha desc";
 
-                return con.Query<Critica>(query);  
+                var crits = con.Query<Critica>(query);
+
+                foreach (var c in crits)
+                {
+                    c.Subcategoria = con.Get<Subcategoria>(c.SubcategoriaID);
+
+                    c.Comentarios = _repoComentarios.GetByCritica(c.Id).ToList();
+                }
+
+                return crits;
             }
         }
 
@@ -56,7 +62,16 @@ namespace CritipediaDataAccess.Repositories
                                  Order by Fecha desc";
                 var parameters = new {CategoriaId = idCategoria };
 
-                return con.Query<Critica>(query, parameters);
+                var crits = con.Query<Critica>(query, parameters);
+
+                foreach (var c in crits)
+                {
+                    c.Subcategoria = con.Get<Subcategoria>(c.SubcategoriaID);
+
+                    c.Comentarios = _repoComentarios.GetByCritica(c.Id).ToList();
+                }
+
+                return crits;
             }
         }
     }

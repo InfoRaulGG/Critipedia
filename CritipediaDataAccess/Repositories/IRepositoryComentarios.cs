@@ -6,6 +6,8 @@ namespace CritipediaDataAccess.Repositories
     public interface IRepositoryComentarios : IRepository<Comentario>
     {
         IEnumerable<Comentario> GetPaginated(int idCritica, int page, int rows);
+        IEnumerable<Comentario> GetByCritica(int idCritica);
+
 
     }
 }

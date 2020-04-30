@@ -12,7 +12,7 @@ namespace CritipediaModels.Mappers
             returnDto.Date = cmt.Fecha;
             returnDto.Punctuation = cmt.Nota;
             returnDto.ReviewId = cmt.CriticaId;
-            //returnDto.User = UserMapper.Map(cmt.Usuario);
+            returnDto.User = UserMapper.Map(cmt.Usuario);
 
             return returnDto;
         }

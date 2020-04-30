@@ -3,7 +3,7 @@ using Entities;
 
 namespace CritipediaModels.Mappers
 {
-    public static class UserMappercs
+    public static class UserMapper
     {
         public static UserDTO Map(User u)
         {

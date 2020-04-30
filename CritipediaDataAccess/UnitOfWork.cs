@@ -28,11 +28,11 @@ namespace CritipediaDataAccess
 
         public UnitOfWork(string connectionString)
         {
-            RepositoryCategorias = new RepositoryCategorias(connectionString);
-            RepositoryComentarios = new RepositoryComentarios(connectionString);
-            RepositoryCriticas = new RepositoryCriticas(connectionString);
             RepositorySubcategorias = new RepositorySubcategorias(connectionString);
             RepositoryUser = new RepositoryUser(connectionString);
+            RepositoryCategorias = new RepositoryCategorias(connectionString, RepositorySubcategorias);
+            RepositoryComentarios = new RepositoryComentarios(connectionString, RepositoryUser);
+            RepositoryCriticas = new RepositoryCriticas(connectionString, RepositoryComentarios);
 
         }
     }
