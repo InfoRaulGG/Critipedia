@@ -32,7 +32,7 @@ namespace CritipediaDataAccess.Repositories
             }
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             using (var con = new SqlConnection(_connectionStrings))
             {

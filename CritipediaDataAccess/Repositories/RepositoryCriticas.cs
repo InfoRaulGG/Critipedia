@@ -31,6 +31,17 @@ namespace CritipediaDataAccess.Repositories
             }         
         }
 
+        public override Critica GetById(int id)
+        {
+            using (var con = new SqlConnection(_connectionStrings))
+            {
+                var crit = con.Get<Critica>(id);
+                crit.Subcategoria = con.Get<Subcategoria>(crit.SubcategoriaID);
+                crit.Comentarios = _repoComentarios.GetByCritica(crit.Id).ToList();
+
+                return crit;
+            }
+        }
         public IEnumerable<Critica> GetLastFive()
         {
             using (var con = new SqlConnection(_connectionStrings))
