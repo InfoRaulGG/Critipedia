@@ -1,20 +1,45 @@
 ﻿using CritipediaModels.DTOs;
 using Entities;
+using System.Collections.Generic;
 
 namespace CritipediaModels.Mappers
 {
     public static class CommentMapper
     {
-        public static CommentDTO Map(Comentario cmt)
+        public static object Map(object cmts)
         {
-            CommentDTO returnDto = new CommentDTO();
-            returnDto.Description = cmt.Descripcion;
-            returnDto.Date = cmt.Fecha;
-            returnDto.Punctuation = cmt.Nota;
-            returnDto.ReviewId = cmt.CriticaId;
-            returnDto.User = UserMapper.Map(cmt.Usuario);
+            if (cmts is List<Comentario>)
+            {
+                List<CommentDTO> returnDto = new List<CommentDTO>();
 
-            return returnDto;
+                foreach (var cmt in (List<Comentario>)cmts)
+                {
+                    CommentDTO ObjectMap = new CommentDTO();
+
+                    ObjectMap.Description = cmt.Descripcion;
+                    ObjectMap.Date = cmt.Fecha;
+                    ObjectMap.Punctuation = cmt.Nota;
+                    ObjectMap.ReviewId = cmt.CriticaId;
+                    ObjectMap.UserId = cmt.UserId;
+
+                    returnDto.Add(ObjectMap);
+                }
+
+                return returnDto;
+            }
+            else
+            {
+                CommentDTO returnDto = new CommentDTO();
+                var cmt = (Comentario)cmts;
+
+                returnDto.Description = cmt.Descripcion;
+                returnDto.Date = cmt.Fecha;
+                returnDto.Punctuation = cmt.Nota;
+                returnDto.ReviewId = cmt.CriticaId;
+                returnDto.UserId = cmt.UserId;
+
+                return returnDto;
+            }
         }
     }
 }

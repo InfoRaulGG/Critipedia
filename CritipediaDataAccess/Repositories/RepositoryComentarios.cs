@@ -19,10 +19,10 @@ namespace CritipediaDataAccess.Repositories
             {
                 var comentarios = con.GetAll<Comentario>();
 
-                foreach(var c in comentarios)
-                {
-                    c.Usuario = _repoUser.GetById(c.UserId);
-                }
+                //foreach(var c in comentarios)
+                //{
+                //    c.Usuario = _repoUser.GetById(c.UserId);
+                //}
 
                 return comentarios;
             }
@@ -38,10 +38,10 @@ namespace CritipediaDataAccess.Repositories
 
                 var comentarios = con.Query<Comentario>(query);
 
-                foreach (var c in comentarios)
-                {
-                    c.Usuario = _repoUser.GetById(c.UserId);
-                }
+                //foreach (var c in comentarios)
+                //{
+                //    c.Usuario = _repoUser.GetById(c.UserId);
+                //}
 
                 return comentarios;
             }
@@ -50,19 +50,15 @@ namespace CritipediaDataAccess.Repositories
         {
             using (var con = new SqlConnection(_connectionStrings))
             {
-                string query = @$"SELECT *
-                                 FROM [dbo].Comentarios
-                                 WHERE CriticaId = {idCritica} 
-                                 Order by Fecha desc  
-                                 OFFSET ({page - 1}) * {rows} ROWS 
-                                 FETCH NEXT {rows} ROWS ONLY;";
-
-                var comentarios = con.Query<Comentario>(query);
-
-                foreach (var c in comentarios)
-                {
-                    c.Usuario = _repoUser.GetById(c.UserId);
-                }
+                string query = @$"SELECT * 
+	                            FROM [dbo].Comentarios
+	                            WHERE CriticaId = @CriticaId
+	                            ORDER BY Fecha desc
+	                            OFFSET @rows * (@page - 1) ROWS 
+	                            FETCH NEXT @rows ROWS ONLY;";
+                
+                var parameters = new {CriticaId =  idCritica, page = page, rows = rows};
+                var comentarios = con.Query<Comentario>(query, parameters);
 
                 return comentarios;
             }

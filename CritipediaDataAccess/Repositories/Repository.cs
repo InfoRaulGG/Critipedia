@@ -1,9 +1,6 @@
 ﻿using Dapper.Contrib.Extensions;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CritipediaDataAccess.Repositories
 {
@@ -54,6 +51,11 @@ namespace CritipediaDataAccess.Repositories
             {
                 return con.Update(entity);
             }
+        }
+
+        IEnumerable<T> IRepository<T>.GetAll()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

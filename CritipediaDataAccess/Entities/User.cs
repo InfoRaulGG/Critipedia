@@ -6,7 +6,6 @@ namespace Entities
     public class User
     {
         [Key]
-        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [MaxLength(100)]

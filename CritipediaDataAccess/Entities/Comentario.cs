@@ -7,7 +7,6 @@ namespace Entities
     public class Comentario
     {
         [Key]
-        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
@@ -17,12 +16,9 @@ namespace Entities
         [Required]
         public DateTime Fecha { get; set; }
         [ForeignKey("UserId")]
-        public User Usuario { get; set; }
         [Required]
         public int UserId { get; set; }
-
         [ForeignKey("CriticaId")]
-        public Critica Critica { get; set; }
         [Required]
         public int CriticaId { get; set; }
 

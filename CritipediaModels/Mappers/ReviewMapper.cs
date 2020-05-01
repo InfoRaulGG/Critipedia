@@ -6,40 +6,49 @@ namespace CritipediaModels.Mappers
 {
     public static class ReviewMapper
     {
-        public static ReviewDTO Map(Critica crt)
+        public static object Map(object crts)
         {
-            ReviewDTO returnDto = new ReviewDTO();
-
-            returnDto.Title = crt.Titulo;
-            returnDto.Description = crt.Descripcion;
-            returnDto.Announce = crt.Anuncio;
-            returnDto.Trailer = crt.Trailer;
-            returnDto.Date = crt.Fecha;
-            returnDto.Image = crt.Imagen;
-            returnDto.Cover = crt.Portada;
-            returnDto.Punctuation = crt.Puntuacion;
-            returnDto.Comments = new List<CommentDTO>();
-
-            foreach(var c in crt.Comentarios)
+            if (crts is List<Critica>)
             {
-                returnDto.Comments.Add(CommentMapper.Map(c));
+                List<ReviewDTO> returnListDto = new List<ReviewDTO>();
+
+                foreach (var crt in (List<Critica>)crts)
+                {
+                    ReviewDTO returnDto = new ReviewDTO();
+
+                    returnDto.Title = crt.Titulo;
+                    returnDto.Description = crt.Descripcion;
+                    returnDto.Announce = crt.Anuncio;
+                    returnDto.Trailer = crt.Trailer;
+                    returnDto.Date = crt.Fecha;
+                    returnDto.Image = crt.Imagen;
+                    returnDto.Cover = crt.Portada;
+                    returnDto.Punctuation = crt.Puntuacion;
+
+                    returnListDto.Add(returnDto);
+
+                }
+
+                return returnListDto;
             }
-
-            returnDto.Subcategory = SubcategoryMapper.Map(crt.Subcategoria);
-
-            return returnDto;
-        }
-
-        public static List<ReviewDTO> MapAll(List<Critica> crts)
-        {
-            List<ReviewDTO> returnDto = new List<ReviewDTO>();
-
-            foreach(var c in crts)
+            else
             {
-                returnDto.Add(Map(c));
-            }
+                ReviewDTO returnDto = new ReviewDTO();
 
-            return returnDto;
+                var crt = (Critica)crts;
+
+                returnDto.Title = crt.Titulo;
+                returnDto.Description = crt.Descripcion;
+                returnDto.Announce = crt.Anuncio;
+                returnDto.Trailer = crt.Trailer;
+                returnDto.Date = crt.Fecha;
+                returnDto.Image = crt.Imagen;
+                returnDto.Cover = crt.Portada;
+                returnDto.Punctuation = crt.Puntuacion;
+
+                return returnDto;
+            }
+         
         }
     }
 }

@@ -51,7 +51,6 @@ namespace CritipediaDataAccess
                     }
                 );
             }
-            builder.Entity<Subcategoria>().HasOne(x => x.Categoria).WithMany(x => x.Subcategorias).OnDelete(DeleteBehavior.NoAction);
 
             int countPk = 1;
             for (var i = 0; i < 4; i++)

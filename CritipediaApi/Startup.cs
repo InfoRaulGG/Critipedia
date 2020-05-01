@@ -1,5 +1,8 @@
+using CritipediaApi.Auth;
 using CritipediaApi.Filters;
 using CritipediaDataAccess;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -24,10 +27,32 @@ namespace CritipediaApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUnitOfWork>( opt => new UnitOfWork( Configuration.GetConnectionString("Critipedia") ) );
-            //services.AddControllers(opts => 
-            //opts.Filters.Add(typeof(JsonExceptionFilter)) 
-            //);
+
+            services.AddLogging();
+
+            var tokenProvider = new JwtProvider("issuer", "audience", "critipedia_2020");
+            services.AddSingleton<ITokenProvider>(tokenProvider);
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opts =>
+                {
+                    opts.RequireHttpsMetadata = false;
+                    opts.TokenValidationParameters = tokenProvider.GetValidationParameters();
+                });
+
+            services.AddAuthorization(auth =>
+            {
+                auth.DefaultPolicy = new AuthorizationPolicyBuilder()
+                   .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                   .RequireAuthenticatedUser()
+                   .Build();
+            });
+
             services.AddControllers();
+
+            //services.AddControllers(opts =>
+            //    opts.Filters.Add(typeof(JsonExceptionFilter))
+            //);     
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
