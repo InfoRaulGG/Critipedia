@@ -1,9 +1,13 @@
 ﻿using Dapper.Contrib.Extensions;
 using Microsoft.Data.SqlClient;
+<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+=======
+using System.Collections.Generic;
+>>>>>>> develop
 
 namespace CritipediaDataAccess.Repositories
 {
@@ -14,6 +18,11 @@ namespace CritipediaDataAccess.Repositories
         {
             _connectionStrings = connectionStrings;
         }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> develop
         public bool Delete(T entity)
         {
             using (var con = new SqlConnection(_connectionStrings))
@@ -22,7 +31,11 @@ namespace CritipediaDataAccess.Repositories
             }
         }
 
+<<<<<<< HEAD
         public IEnumerable<T> GetAll()
+=======
+        public virtual IEnumerable<T> GetAll()
+>>>>>>> develop
         {
             using (var con = new SqlConnection(_connectionStrings))
             {
@@ -30,7 +43,11 @@ namespace CritipediaDataAccess.Repositories
             }
         }
 
+<<<<<<< HEAD
         public T GetById(int id)
+=======
+        public virtual T GetById(int id)
+>>>>>>> develop
         {
             using (var con = new SqlConnection(_connectionStrings))
             {
@@ -53,5 +70,13 @@ namespace CritipediaDataAccess.Repositories
                 return con.Update(entity);
             }
         }
+<<<<<<< HEAD
+=======
+
+        IEnumerable<T> IRepository<T>.GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+>>>>>>> develop
     }
 }

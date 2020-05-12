@@ -6,9 +6,14 @@ namespace Entities
     public class User
     {
         [Key]
+<<<<<<< HEAD
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
+=======
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+>>>>>>> develop
         [MaxLength(100)]
         [Required]
         public string Nombre { get; set; }
