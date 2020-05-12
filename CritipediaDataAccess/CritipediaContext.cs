@@ -6,6 +6,14 @@ namespace CritipediaDataAccess
 {
     public class CritipediaContext : DbContext
     {
+        public CritipediaContext()
+        {
+
+        }
+        public CritipediaContext(DbContextOptions<CritipediaContext> options) : base(options)
+        {
+
+        }
         public DbSet<Critica> Criticas { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
@@ -18,6 +26,11 @@ namespace CritipediaDataAccess
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Critipedia;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
 
+        public void EnsureDeleted()
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             Random rnd = new Random();
@@ -28,7 +41,7 @@ namespace CritipediaDataAccess
                 builder.Entity<User>().HasData(
                     new User
                     {
-                        UserId = i + 1,
+                        Id = i + 1,
                         Nombre = i % 2 == 0 ? "Male" + (i + 1) : "Female" + (i + 1),
                         Apellidos = MockService.GenerateRandomString(rnd.Next(10)) + " " + MockService.GenerateRandomString(rnd.Next(10)),
                         Edad = rnd.Next(75) + 1,
@@ -46,12 +59,11 @@ namespace CritipediaDataAccess
                 builder.Entity<Categoria>().HasData(
                     new Categoria
                     {
-                        CategoriaId = i + 1,
+                        Id = i + 1,
                         Nombre = MockService.GenerateRandomString(rnd.Next(10)),
                     }
                 );
             }
-            builder.Entity<Subcategoria>().HasOne(x => x.Categoria).WithMany(x => x.Subcategorias).OnDelete(DeleteBehavior.NoAction);
 
             int countPk = 1;
             for (var i = 0; i < 4; i++)
@@ -61,7 +73,7 @@ namespace CritipediaDataAccess
                     builder.Entity<Subcategoria>().HasData(
                        new Subcategoria
                        {
-                           SubcategoriaId = countPk,
+                           Id = countPk,
                            Nombre = MockService.GenerateRandomString(rnd.Next(10)),
                            CategoriaId = i + 1,
                        }
@@ -75,7 +87,7 @@ namespace CritipediaDataAccess
                 builder.Entity<Critica>().HasData(
                   new Critica
                   {
-                      CriticaId = i + 1,
+                      Id = i + 1,
                       Titulo = MockService.GenerateRandomString(rnd.Next(50)),
                       Descripcion = MockService.GenerateRandomString(rnd.Next(200)),
                       Anuncio = MockService.GenerateRandomString(rnd.Next(150)),
@@ -94,7 +106,7 @@ namespace CritipediaDataAccess
                 builder.Entity<Comentario>().HasData(
                     new Comentario
                     {
-                        ComentarioId = i + 1,
+                        Id = i + 1,
                         Descripcion = MockService.GenerateRandomString(rnd.Next(150)),
                         Nota = Convert.ToDecimal(rnd.NextDouble()) * +rnd.Next(9),
                         Fecha = DateTime.Now,

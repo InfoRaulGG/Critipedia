@@ -6,9 +6,8 @@ namespace Entities
     public class PasswordReset
     {
         [Key]
-        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PaswordResetId { get; set; }
+        public int Id { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -17,6 +16,8 @@ namespace Entities
         [Required]
         public bool Active { get; set; }
 
-        public User User { get; set; } 
+        [Required]
+        [ForeignKey("UserID")]
+        public int UserID { get; set; } 
     }
 }

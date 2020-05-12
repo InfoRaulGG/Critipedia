@@ -7,10 +7,9 @@ namespace Entities
 {
     public class Critica
     {
-        [Required]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CriticaId { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Titulo { get; set; }
         [Required]
@@ -28,11 +27,9 @@ namespace Entities
         [Required]
         public string Portada { get; set; }
 
-
+        [Required]
+        [ForeignKey("SubcategoriaID")]
         public int SubcategoriaID { get; set; }
-        public Subcategoria Subcategoria { get; set; }
-        public ICollection<Comentario> Comentarios { get; set; }
-
 
     }
 }

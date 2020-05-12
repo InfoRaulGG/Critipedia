@@ -6,13 +6,11 @@ namespace Entities
 {
     public class Categoria
     {
+
         [Key]
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CategoriaId { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Nombre { get; set; }
-        public ICollection<Subcategoria> Subcategorias { get; set; }
 
     }
 }

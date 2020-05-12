@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Entities;
 
 namespace CritipediaDataAccess.Repositories
 {
-    public interface IRepositoryUser
+    public interface IRepositoryUser : IRepository<User>
     {
-
+        User ValidateUser(string email, string password);
     }
 }

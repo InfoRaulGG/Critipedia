@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace CritipediaDataAccess.Repositories
 {
-    interface IRepositoryCriticas 
+    public interface IRepositoryCriticas : IRepository<Critica>
     {
         IEnumerable<Critica> GetLastFive();
-        IEnumerable<Critica> GetTopFiveCategory();
+        IEnumerable<Critica> GetTopFiveCategory(int idCategoria);
 
     }
 }
