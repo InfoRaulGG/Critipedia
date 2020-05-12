@@ -1,10 +1,12 @@
 ﻿using CritipediaDataAccess;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CritipediaApi.Exceptions
 {
     [ApiController]
+    [Authorize]
     public class ReviewController : ControllerBase
     {
         private IUnitOfWork _work;

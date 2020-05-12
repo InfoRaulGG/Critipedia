@@ -2,12 +2,14 @@
 using CritipediaDataAccess;
 using CritipediaModels.Mappers;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace CritipediaApi.Exceptions
 {
     [ApiController]
+    [Authorize]
     public class CommentController : ControllerBase
     {
         private IUnitOfWork _work;

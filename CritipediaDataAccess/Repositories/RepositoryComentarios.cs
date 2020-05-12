@@ -9,9 +9,15 @@ namespace CritipediaDataAccess.Repositories
     public class RepositoryComentarios : Repository<Comentario>, IRepositoryComentarios
     {
         private IRepositoryUser _repoUser;
+        private CritipediaContext _context;
         public RepositoryComentarios(string connectionStrings, IRepositoryUser repoUser) : base(connectionStrings)
         {
             _repoUser = repoUser;
+        }
+
+        public RepositoryComentarios(CritipediaContext context, string connectionStrings) : base(connectionStrings)
+        {
+            _context = context;
         }
         public override IEnumerable<Comentario> GetAll()
         {

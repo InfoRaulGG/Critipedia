@@ -6,6 +6,14 @@ namespace CritipediaDataAccess
 {
     public class CritipediaContext : DbContext
     {
+        public CritipediaContext()
+        {
+
+        }
+        public CritipediaContext(DbContextOptions<CritipediaContext> options) : base(options)
+        {
+
+        }
         public DbSet<Critica> Criticas { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
@@ -16,6 +24,11 @@ namespace CritipediaDataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Critipedia;Trusted_Connection=True;MultipleActiveResultSets=true");
+        }
+
+        public void EnsureDeleted()
+        {
+            throw new NotImplementedException();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
