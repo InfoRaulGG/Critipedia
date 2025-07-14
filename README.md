@@ -1,6 +1,6 @@
 # 🐾 Critipedia
 
-**Critipedia** es una API REST desarrollada en **ASP.NET Core 3.1** para gestionar una enciclopedia de criaturas fantásticas o reales.
+**Critipedia** es una API REST desarrollada en **ASP.NET Core 3.1** para gestionar una enciclopedia de criticas
 
 ---
 
