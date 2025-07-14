@@ -1,101 +1,62 @@
-# 🎟️ Ticketit - API REST de Gestión de Tickets
+🐾 Critipedia
+Critipedia es una API REST desarrollada en ASP.NET Core para gestionar una enciclopedia de criaturas fantásticas o reales. Pensada para uso educativo, juegos o sistemas de catalogación.
 
-**Ticketit** es una API REST ligera y escalable para la gestión de tickets de soporte, desarrollada con **Node.js**, **Express** y **MongoDB**. Diseñada como solución interna o como punto de partida para sistemas de soporte más completos.
+✨ Características principales
+CRUD completo para criaturas con detalles
 
----
+Uso de Entity Framework Core para gestión de base de datos SQL Server
 
-## ✨ Características principales
+Pruebas unitarias con xUnit
 
-* 📌 Crear, actualizar y eliminar tickets
-* 🗂️ Gestión de estado, prioridad y categoría
-* 📅 Filtros por fecha y estado
-* 🧪 Pruebas automatizadas con Mocha + Chai
-* 🐳 Despliegue rápido con Docker
+Contenerización con Docker
 
----
+Arquitectura limpia y modular
 
-## 🧰 Tecnologías utilizadas
+🧰 Tecnologías utilizadas
+ASP.NET Core 7.0
 
-* **Node.js** + **Express** para la lógica de backend
-* **MongoDB** + **Mongoose** como base de datos NoSQL
-* **Mocha**, **Chai** y **Supertest** para pruebas unitarias e integración
-* **Docker** para contenerización y despliegue
-* **dotenv** para gestión de variables de entorno
+Entity Framework Core
 
----
+SQL Server
 
-## 🚀 Instalación local
+xUnit para pruebas
 
-```bash
-git clone https://github.com/InfoRaulGG/ticketit.git
-cd ticketit
-npm install
-cp .env.example .env  # Configura tu conexión a MongoDB
-npm run dev            # Ejecuta en modo desarrollo
-```
+Docker
 
-> Asegúrate de que MongoDB esté corriendo y configurado correctamente en el archivo `.env`.
+AutoMapper
 
----
+🚀 Ejecución local
+Clona el repositorio
 
-## 🐳 Despliegue con Docker
+Abre la solución Critipedia.sln en Visual Studio o Rider
 
-```bash
-docker build -t ticketit .
-docker run -p 3000:3000 --env-file .env ticketit
-```
+Configura la cadena de conexión en appsettings.Development.json
 
----
+Ejecuta el proyecto Critipedia.API (F5 o desde terminal con dotnet run en la carpeta src/Critipedia.API)
 
-## 📬 Endpoints principales
+🧪 Pruebas
+Desde la carpeta de tests:
 
-| Método | Ruta              | Descripción               |
-| ------ | ----------------- | ------------------------- |
-| GET    | /api/tickets      | Obtener todos los tickets |
-| POST   | /api/tickets      | Crear un nuevo ticket     |
-| GET    | /api/tickets/\:id | Ver un ticket por ID      |
-| PUT    | /api/tickets/\:id | Actualizar un ticket      |
-| DELETE | /api/tickets/\:id | Eliminar un ticket        |
+bash
+Copiar
+Editar
+dotnet test
+📁 Estructura del proyecto
+bash
+Copiar
+Editar
+Critipedia/
+├── src/
+│   └── Critipedia.API/       # Proyecto API
+├── tests/
+│   └── Critipedia.Tests/     # Proyecto pruebas xUnit
+├── Dockerfile
+└── Critipedia.sln
+👨‍💻 Autor
+Raúl González Galán
+🔗 LinkedIn
+💻 GitHub
 
-> Actualmente no requiere autenticación. Ideal para pruebas, entornos de desarrollo o uso interno.
-
----
-
-## 🧪 Ejecutar pruebas
-
-```bash
-npm test
-```
-
-> Las pruebas están desarrolladas con Mocha, Chai y Supertest para validar los endpoints y el comportamiento de la API.
-
----
-
-## 📁 Estructura del proyecto
-
-```
-ticketit/
-├── controllers/    # Lógica de negocio
-├── models/         # Esquemas de Mongoose
-├── routes/         # Definición de rutas
-├── tests/          # Pruebas automatizadas
-├── utils/          # Funciones auxiliares
-├── .env.example    # Variables de entorno
-├── Dockerfile      # Configuración de Docker
-├── app.js          # Configuración principal de Express
-└── server.js       # Arranque del servidor
-```
-
----
-
-## 👨‍💻 Autor
-
-**Raúl González Galán**
-🔗 [LinkedIn](https://www.linkedin.com/in/raul-gonzalez-galan-141702199/)
-💻 [GitHub](https://github.com/InfoRaulGG)
-
----
-
-## 📄 Licencia
-
+📄 Licencia
 MIT License
+
